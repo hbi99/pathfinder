@@ -1,0 +1,373 @@
+/*
+ * DEFAULTS
+ */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  background: url(grid.png) 0px 0px;
+}
+.obstacle {
+  box-shadow: 0px 0px 1px #000,
+				0px 0px 5px #000,
+				0px 0px 1px #000;
+  background: rgba(200, 0, 200, 0.35);
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  z-index: 2;
+}
+.obstacle.o1 {
+  top: 700px;
+  left: 900px;
+}
+.obstacle.o2 {
+  top: 700px;
+  left: 900px;
+}
+.obstacle.o3 {
+  top: 700px;
+  left: 900px;
+}
+div.start {
+  background: rgba(0, 120, 0, 0.75);
+  box-shadow: 0px 0px 1px #000,
+				0px 0px 2px #000,
+				0px 0px 7px #060;
+  top: 100px;
+  left: 100px;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0px 0px -5px;
+  z-index: 3;
+}
+div.start:after {
+  content: 'start';
+  position: absolute;
+  top: -13px;
+  left: 100%;
+  font: 10px Arial;
+}
+div.end {
+  background: rgba(200, 70, 70, 0.75);
+  box-shadow: 0px 0px 1px #000,
+				0px 0px 2px #000,
+				0px 0px 7px #a00;
+  top: 300px;
+  left: 360px;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0px 0px -5px;
+  z-index: 4;
+}
+div.end:after {
+  content: 'end';
+  position: absolute;
+  top: -13px;
+  left: 100%;
+  font: 10px Arial;
+}
+.line {
+  background: rgba(0, 0, 0, 0.25);
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin-top: 0px;
+}
+.line span {
+  display: none;
+  position: absolute;
+  background: #000;
+  color: #fff;
+  padding: 2px 5px;
+  font: 10px Arial;
+  z-index: 2;
+}
+.line.hover {
+  background: rgba(110, 0, 0, 0.75);
+}
+.line.hover > span {
+  display: block;
+}
+.line.arrow {
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+.line.start > .left {
+  top: 0px;
+  bottom: auto;
+  left: auto;
+  right: 100%;
+}
+.line.start > .right {
+  top: 0px;
+  bottom: auto;
+  left: 100%;
+  right: auto;
+}
+.line.start > .up {
+  top: auto;
+  bottom: 100%;
+  left: 0px;
+  right: auto;
+}
+.line.start > .down {
+  top: 100%;
+  bottom: auto;
+  left: 0px;
+  right: auto;
+}
+.line.up {
+  bottom: 100%;
+  right: 0px;
+}
+.line.up > .line {
+  top: 0px;
+  bottom: auto;
+}
+.line.up > .arrow {
+  left: -5px;
+  bottom: 100%;
+  top: auto;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 21px solid rgba(0, 0, 0, 0.25);
+}
+.line.up > span {
+  left: 18px;
+  bottom: -7px;
+}
+.line.up > span:before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  margin-top: -3px;
+  width: 0;
+  height: 0;
+  border-top: 3px solid transparent;
+  border-right: 9px solid #000;
+  border-bottom: 3px solid transparent;
+}
+.line.up > span:first-child {
+  bottom: auto;
+  left: auto;
+  top: -5px;
+  right: 17px;
+}
+.line.up > span:first-child:before {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  margin-top: -3px;
+  width: 0;
+  height: 0;
+  border-top: 3px solid transparent;
+  border-left: 9px solid #000;
+  border-bottom: 3px solid transparent;
+  border-right-color: transparent;
+}
+.line.down {
+  top: 100%;
+  right: 0px;
+}
+.line.down > .arrow {
+  left: -5px;
+  top: 100%;
+  bottom: auto;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 21px solid rgba(0, 0, 0, 0.25);
+}
+.line.down > span {
+  left: 17px;
+  bottom: -3px;
+}
+.line.down > span:before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  margin-top: -3px;
+  width: 0;
+  height: 0;
+  border-top: 3px solid transparent;
+  border-right: 9px solid #000;
+  border-bottom: 3px solid transparent;
+}
+.line.down > span:first-child {
+  bottom: auto;
+  left: auto;
+  right: 17px;
+  top: -7px;
+}
+.line.down > span:first-child:before {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  margin-top: -3px;
+  width: 0;
+  height: 0;
+  border-top: 3px solid transparent;
+  border-left: 9px solid #000;
+  border-bottom: 3px solid transparent;
+  border-right-color: transparent;
+}
+.line.right {
+  bottom: 0px;
+  left: 100%;
+}
+.line.right > .arrow {
+  top: -5px;
+  left: 100%;
+  right: auto;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 21px solid rgba(0, 0, 0, 0.25);
+}
+.line.right > span {
+  top: -22px;
+  right: -17px;
+}
+.line.right > span:first-child {
+  top: auto;
+  bottom: -22px;
+  right: auto;
+  left: -21px;
+}
+.line.right > span:first-child:before {
+  content: "";
+  position: absolute;
+  top: auto;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -2px;
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-bottom: 9px solid #000;
+  border-right: 3px solid transparent;
+  border-top-color: transparent;
+}
+.line.right > span:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -2px;
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-top: 9px solid #000;
+  border-right: 3px solid transparent;
+}
+.line.left {
+  bottom: 0px;
+  right: 100%;
+}
+.line.left > .line {
+  left: 0px;
+  right: auto;
+}
+.line.left > .arrow {
+  top: -5px;
+  left: auto;
+  right: 100%;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 21px solid rgba(0, 0, 0, 0.25);
+}
+.line.left > span {
+  top: -22px;
+  right: -19px;
+}
+.line.left > span:first-child {
+  top: auto;
+  bottom: -22px;
+  right: auto;
+  left: -17px;
+  z-index: 5;
+}
+.line.left > span:first-child:before {
+  content: "";
+  position: absolute;
+  top: auto;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -2px;
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-bottom: 9px solid #000;
+  border-right: 3px solid transparent;
+  border-top-color: transparent;
+}
+.line.left > span:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -2px;
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-top: 9px solid #000;
+  border-right: 3px solid transparent;
+}
+/*
+ * Case: right-to-left
+ *       single obstacle
+ */
+.obstacle.o1 {
+  top: 210px;
+  left: 340px;
+  height: 110px;
+  width: 60px;
+}
+.obstacle.o2 {
+  top: 430px;
+  left: 390px;
+}
+.obstacle.o3 {
+  top: 390px;
+  left: 170px;
+}
+div.start {
+  top: 300px;
+  left: 600px;
+}
+div.end {
+  top: 550px;
+  left: 200px;
+}
+/*
+ * Case 2
+.obstacle.o1 { top: 370px; left: 340px; width: 90px; }
+.obstacle.o2 { top: 200px; left: 340px; height: 170px; }
+div.start    { top: 300px; left: 600px; }
+div.end      { top: 300px; left: 200px; }
+ */
+/*
+ * Case 3
+.obstacle.o1 { top: 330px; left: 180px; width: 60px; height: 90px; }
+.obstacle.o2 { top: 330px; left: 240px; width: 170px; height: 60px; }
+div.start    { top: 600px; left: 300px; }
+div.end      { top: 200px; left: 300px; }
+ */
+/*
+ * Case 4
+.obstacle.o1 { top: 260px; left: 340px; width: 60px; height: 110px; }
+.obstacle.o2 { top: 200px; left: 380px; height: 60px; }
+.obstacle.o3 { top: 600px; left: 600px; display: none; }
+div.start    { top: 300px; left: 600px; }
+div.end      { top: 300px; left: 200px; }
+ */
+/*
+ * MIXINS
+ */
